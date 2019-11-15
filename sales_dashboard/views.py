@@ -5,9 +5,8 @@ from django.views import generic
 from django.utils import timezone
 from .models import Region, Property, Sale, Person
 from django.views.generic import ListView
-from django_tables2 import SingleTableView
 from .tables import SalesFeedTable, RegionTable, PropertyTable, PersonTable
-from django_tables2 import MultiTableMixin
+from django_tables2 import MultiTableMixin, SingleTableView
 from django.views.generic.base import TemplateView
 
 def index(request):
@@ -24,9 +23,8 @@ class SalesListView(MultiTableMixin, TemplateView):
     tables = [
         RegionTable(qs1),
         PropertyTable(qs2),
-        PersonTable(qs3),  
-        SalesFeedTable(qs, )
+        PersonTable(qs3),
+        SalesFeedTable(qs)    
     ]
-
     template_name = 'sales_dashboard/sales.html'
 

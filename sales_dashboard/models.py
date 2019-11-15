@@ -2,6 +2,7 @@ from django.db import models
 import datetime
 from django.utils import timezone
 from django.contrib.auth.models import User
+import random
 
 class Region(models.Model):
     region_name = models.CharField(max_length=10)
@@ -31,8 +32,12 @@ class Sale(models.Model):
     employee = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Person")
     prop_state = models.CharField(null=True, max_length=5, choices=[('new','New'),('used','Used')])
     date = models.DateField('Sale Date')
-    def __str__(self):
-        return 'Congrats %s for a %s sale at %s!' % (self.employee, self.prop_state, self.prop_name.prop_code )
+    def feed(self):
+        congrats = ['Congrats %s for a %s sale at %s!', 
+            'Lets give it up to %s for getting a %s sale at %s!', 
+            'A big high five to %s for getting a %s sale at %s!', 
+            'Stellar job to %s for getting a %s sale at %s!' ]
+        return  random.choice(congrats) % (self.employee, self.prop_state, self.prop_name.prop_code )
 
 class Person(User):
     class Meta:

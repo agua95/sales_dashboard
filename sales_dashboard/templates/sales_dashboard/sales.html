@@ -5,12 +5,37 @@
     <head>
         <title>Sales Performance</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <style>
+            .body{
+                display:table;
+            }
+            h1{
+                text-align: center;
+            }
+            #sales{
+                
+                display: table-cell;
+                height: 100%;
+                
+                border: 2px solid;
+            }
+            #sales th{
+                text-align:center;
+            }
+            #sales td{
+                text-align: center;
+            }
+        </style>
     </head>
     <body>
         <h1>Sales Performance</h1>
         <div class="row">
             {% for table in tables %}
-                <div class="col-md-4">{% render_table table %}</div>
+                {% if forloop.counter == 4 %}
+                    <div class="col-md-12" id="feed">{% render_table table %}</div>
+                {% else %}
+                    <div class="col-md-4" id="sales">{% render_table table %}</div>
+                {% endif %}
             {% endfor %}
         </div>
     </body>

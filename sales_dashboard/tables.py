@@ -30,5 +30,5 @@ class SalesFeedTable(tables.Table):
     class Meta:
         model = Sale
         template_name = "django_tables2/bootstrap.html"
-        fields = ("__str__", )
+        fields = ("feed", )
         
