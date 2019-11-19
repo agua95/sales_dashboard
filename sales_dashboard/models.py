@@ -1,5 +1,5 @@
 from django.db import models
-import datetime
+from datetime import datetime
 from django.utils import timezone
 from django.contrib.auth.models import User
 import random
@@ -11,8 +11,12 @@ class Region(models.Model):
         return self.region_name
 
     @property
-    def sales(self):
-        return Sale.objects.filter(prop_name__region_name=self).count()
+    def Monthly_Sales(self):
+        return Sale.objects.filter(prop_name__region_name=self, date__month=datetime.today().month).count()
+    
+    def Yearly_Sales(self):
+        return Sale.objects.filter(prop_name__region_name=self, date__year=datetime.today().year).count()
+
 
 class Property(models.Model):
     prop_name = models.CharField(max_length=200)
@@ -23,13 +27,28 @@ class Property(models.Model):
         return self.prop_name
 
     @property
-    def sales(self):
-        return Sale.objects.filter(prop_name=self).count()
+    def Monthly_Sales(self):
+        return Sale.objects.filter( prop_name=self, date__month = datetime.today().month).count()
+
+    def Yearly_Sales(self):
+        return Sale.objects.filter( prop_name=self, date__year = datetime.today().year).count()
+
+class Person(User):
+    class Meta:
+        proxy = True
     
+    def Monthly_Sales(self):
+        return Sale.objects.filter(employee=self, date__month = datetime.today().month).count()
+
+    def Yearly_Sales(self):
+        return Sale.objects.filter(employee=self, date__year = datetime.today().year).count()
+
+    def name(self):
+        return self
 
 class Sale(models.Model):
     prop_name = models.ForeignKey(Property, on_delete=models.CASCADE)
-    employee = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Person")
+    employee = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name="Person")
     prop_state = models.CharField(null=True, max_length=5, choices=[('new','New'),('used','Used')])
     date = models.DateField('Sale Date')
     def feed(self):
@@ -37,16 +56,8 @@ class Sale(models.Model):
             'Lets give it up to %s for getting a %s sale at %s!', 
             'A big high five to %s for getting a %s sale at %s!', 
             'Stellar job to %s for getting a %s sale at %s!' ]
-        return  random.choice(congrats) % (self.employee, self.prop_state, self.prop_name.prop_code )
+        return  random.choice(congrats) % (self.employee, self.prop_state, self.prop_name )
 
-class Person(User):
-    class Meta:
-        proxy = True
-    
-    def sales(self):
-        return Sale.objects.filter(employee=self).count()
-    def name(self):
-        return self
 
 class Posts(models.Model):
     employee = models.ForeignKey(User, on_delete= models.CASCADE)
