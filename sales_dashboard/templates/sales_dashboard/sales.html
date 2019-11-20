@@ -5,98 +5,24 @@
 
 <head>
     <title>Sales Performance</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <style>
-        body {
-            background-color: rgb(209, 209, 209);
-        }
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'sales_dashboard/style.css' %}">
 
-        h1 {
-            text-align: left;
-        }
-
-        #all_tables{
-            margin-left:2%;
-            margin-right:2%
-        }
-        #monthly {
-
-            background-color: rgb(255,255,255);
-            height: 100%;
-            display: block;
-            border: 2px solid rgb(209, 209, 209);
-        }
-
-        #monthly th {
-            text-align: center;
-        }
-
-        #monthly td {
-            text-align: center;
-        }
-
-        #yearly {
-            background-color: rgb(255,255,255);
-            display: none;
-            height: 100%;
-            border: 2px solid rgb(209, 209, 209);
-        }
-
-        #yearly th {
-            text-align: center;
-        }
-
-        #yearly td {
-            text-align: center;
-        }
-
-        .button {
-            display: inline-block;
-            border-radius: 4px;
-            background-color: #56a15a;
-            border: none;
-            color: #FFFFFF;
-            text-align: center;
-            font-size: 15px;
-            padding: 20px;
-            width: 100px;
-            transition: all 0.5s;
-            cursor: pointer;
-            margin: 5px;
-        }
-
-        .button span {
-            cursor: pointer;
-            display: inline-block;
-            position: relative;
-            transition: 0.5s;
-        }
-
-        .button span:after {
-            content: '\00bb';
-            position: absolute;
-            opacity: 0;
-            top: 0;
-            right: -20px;
-            transition: 0.5s;
-        }
-
-        .button:hover span {
-            padding-right: 25px;
-        }
-
-        .button:hover span:after {
-            opacity: 1;
-            right: 0;
-        }
-    </style>
 </head>
 
 <body>
     <script>
         //x = document.getElementsByClassName("table");
 
-
+        function switcher(){
+            var months = document.getElementById("month_tables")
+            var years = document.getElementById("year_tables")
+            var x = document.getElementById("viewswitch")
+            alert("My function works")
+            
+        }
         function monthOnly() {
             var i;
             months = document.getElementById("all_tables").querySelectorAll("#monthly")
@@ -131,25 +57,44 @@
             //document.getElementById("yearly").style.display = "block";
         }      
     </script>
-    <h1>Sales Performance</h1>
+    
+    <div class="row" id="header">
+        <h1 class="col s8">Manufactured Housing Sales Dashboard</h1>
+        <div class="col s4">
+            <div class="switch">
+                <label>
+                    Month
+                    <input id="viewswitch" type="checkbox" onclick="switcher()">
+                    <span class="lever"></span>
+                    Year
+                </label>
+            </div>
+        </div>
 
-    <button class="button" onclick="monthOnly()"><span>Month</span></button>
-    <button class="button" onclick="yearOnly()"><span>Year</span></button>
-    <div class="row" id="all_tables">
-        {% for table in tables %}
-        {% if forloop.counter == 7 %}
-        <div class="col-lg-12"></div>
-        <div class="col-lg-4" id="feed">{% render_table table %}</div>
-
-        {% elif forloop.counter == 3 %}
-        <div class="col-lg-4" id="monthly">{% render_table table %}</div>
-
-        {% elif forloop.counter == 1 or forloop.counter == 2 %}
-        <div class="col-lg-4" id="monthly">{% render_table table %}</div>
-        {% else %}
-        <div class="col-md-4" id="yearly">{% render_table table %}</div>
-        {% endif %}
-        {% endfor %}
+    </div>
+    <div class="row" id="month_tables">
+        <div class="col l4" id="mregion">
+            {% render_table tables.0 %}
+            {% render_table tables.6 %}
+        </div>
+        <div class="col l4" id="mproperty">
+            {% render_table tables.1 %}
+        </div>
+        <div class="col l4" id="mperson">
+            {% render_table tables.2 %}
+        </div>
+    </div>
+    <div class="row" id="year_tables">
+        <div class="col l4" id="yregion">
+            {% render_table tables.3 %}
+            {% render_table tables.6 %}
+        </div>
+        <div class="col l4" id="yproperty">
+            {% render_table tables.4 %}
+        </div>
+        <div class="col l4" id="yperson">
+            {% render_table tables.5 %}
+        </div>
     </div>
 </body>
 
