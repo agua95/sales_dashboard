@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 import random
 
 class Region(models.Model):
-    region_name = models.CharField(max_length=10)
+    region_name = models.CharField(max_length=10, verbose_name="Region")
     
     def __str__(self):
         return self.region_name
@@ -19,9 +19,9 @@ class Region(models.Model):
 
 
 class Property(models.Model):
-    prop_name = models.CharField(max_length=200)
+    prop_name = models.CharField(max_length=200, verbose_name="Property")
     region_name = models.ForeignKey(Region, on_delete=models.CASCADE, verbose_name="Region")
-    prop_code = models.IntegerField(default=0, verbose_name="Property")
+    prop_code = models.IntegerField(default=0, verbose_name="Property Code")
     
     def __str__(self):
         return self.prop_name

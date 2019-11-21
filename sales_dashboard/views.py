@@ -16,6 +16,7 @@ def index(request):
 
 class SalesListView(MultiTableMixin, TemplateView):
     model = Sale, Region, Property, Person
+    template_name = 'sales_dashboard/sales.html'
     qs = Sale.objects.all()
     mq = Sale.objects.filter(date__month = datetime.today().month)
 
@@ -33,5 +34,7 @@ class SalesListView(MultiTableMixin, TemplateView):
         YearPersonTable(yq),
         SalesFeedTable(qs)    
     ]
-    template_name = 'sales_dashboard/sales.html'
+    
+    def regions(self):
+        return Region.objects.all().order_by('region_name')
 

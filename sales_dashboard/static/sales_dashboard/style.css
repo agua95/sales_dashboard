@@ -5,106 +5,291 @@ body {
 #header {
     margin-left: 2%;
     margin-right: 2%;
-    margin-top: 2%;
     background-color: rgb(255, 255, 255);
     border: 2px solid rgb(209, 209, 209);
     border-radius: 10px;
+    height:55px;
+    text-align: justify;
+}
+#title{
+    height: 50px;
+    
+}
+h1{
+    font-size: 20px;
+    color: rgb(10, 26, 112);
+    background-color: yellow;
+    
 }
 
-h1 {
-    text-align: left;
+
+.switch label input[type=checkbox]:checked + .lever:after {
+    background-color: rgb(10, 26, 112);
 }
 
-
-#buttons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.button {
-    display: inline-block;
-    border-radius: 4px;
-    background-color: #56a15a;
-    border: none;
-    color: #FFFFFF;
-    text-align: center;
-    font-size: 15px;
-    padding: 20px;
-    width: 100px;
-    transition: all 0.5s;
-    cursor: pointer;
-
-
-}
-
-.button span {
-    cursor: pointer;
+.switch label .lever {
+    content: "";
     display: inline-block;
     position: relative;
-    transition: 0.5s;
+    width: 36px;
+    height: 14px;
+    background-color: rgba(117, 247, 114, 0.541);
+    border-radius: 15px;
+    margin-right: 10px;
+    -webkit-transition: background 0.3s ease;
+    transition: background 0.3s ease;
+    vertical-align: middle;
+    margin: 0 16px;
 }
 
-.button span:after {
-    content: '\00bb';
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    right: -20px;
-    transition: 0.5s;
-}
-
-.button:hover span {
-    padding-right: 25px;
-}
-
-.button:hover span:after {
-    opacity: 1;
-    right: 0;
-}
-
-#all_tables {
+.switch label .lever:after {
+    background-color: rgba(55, 107, 54, 0.986);
+    -webkit-box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+            box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  }
+#month_tables{
     margin-left: 2%;
-    margin-right: 2%
+    margin-right: 2%;
 }
 
-#monthly {
-    background-color: rgb(255, 255, 255);
-    height: 100%;
-    display: block;
-    border: 2px solid rgb(209, 209, 209);
-    border-radius: 10px;
-}
-
-#monthly th {
-    text-align: center;
-}
-
-#monthly td {
-    text-align: center;
-}
-
-#yearly {
-    background-color: rgb(255, 255, 255);
+#year_tables{
+    margin-left: 2%;
+    margin-right: 2%;
     display: none;
-    height: 100%;
-    border: 2px solid rgb(209, 209, 209);
-    border-radius: 10px;
 }
 
-#yearly th {
-    text-align: center;
+#leftpanel1{
+    margin: 0px;
+    padding: 0px;
 }
 
-#yearly td {
-    text-align: center;
-}
-
-#feed {
+.mregion{
     background-color: rgb(255, 255, 255);
     height: 100%;
-    display: block;
+    border: 2px solid rgb(209, 209, 209);
+    border-radius: 10px;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+.mregion th{
+    text-align: center;
+}
+
+.mregion a{
+    color: rgb(10, 26, 112);
+}
+
+.mregion td{
+    text-align:center;
+}
+
+.chart{
     border: 2px solid rgb(209, 209, 209);
     border-radius: 10px;
 }
 
+
+
+.feed{
+    background-color: rgb(255, 255, 255);
+    height: 100%;
+    border: 2px solid rgb(209, 209, 209);
+    border-radius: 10px;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+.feed th{
+    text-align: center;
+}
+
+.feed a{
+    color: rgb(10, 26, 112);
+}
+
+#mproperty{
+    background-color: rgb(255, 255, 255);
+    height: 580px;
+    border: 2px solid rgb(209, 209, 209);
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+
+#mproperty::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+#mproperty::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+#mproperty::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: rgb(10, 26, 112);
+}
+
+#mproperty th{
+    text-align: center;
+}
+
+#mproperty a{
+    color: rgb(10, 26, 112);
+}
+
+#mproperty td{
+    text-align:center;
+}
+
+#mperson{
+    background-color: rgb(255, 255, 255);
+    height: 580px;
+    border: 2px solid rgb(209, 209, 209);
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+
+#mperson::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+#mperson::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+#mperson::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: rgb(10, 26, 112);
+}
+
+#mperson th{
+    text-align: center;
+}
+
+#mperson a{
+    color: rgb(10, 26, 112);
+}
+
+#mperson td{
+    text-align:center;
+}
+
+#leftpanel2{
+    margin: 0px;
+    padding: 0px;
+}
+
+.yregion{
+    background-color: rgb(255, 255, 255);
+    height: 100%;
+    border: 2px solid rgb(209, 209, 209);
+    border-radius: 10px;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+.yregion th{
+    text-align: center;
+}
+
+.yregion a{
+    color: rgb(10, 26, 112);
+}
+
+.yregion td{
+    text-align:center;
+}
+
+#yproperty{
+    background-color: rgb(255, 255, 255);
+    height: 300px;
+    border: 2px solid rgb(209, 209, 209);
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+
+#yproperty::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+#yproperty::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+#yproperty::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: rgb(10, 26, 112);
+}
+
+#yproperty th{
+    text-align: center;
+}
+
+#yproperty a{
+    color: rgb(10, 26, 112);
+}
+
+#yproperty td{
+    text-align:center;
+}
+
+#yperson{
+    background-color: rgb(255, 255, 255);
+    height: 580px;
+    border: 2px solid rgb(209, 209, 209);
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+
+#yperson::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+#yperson::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+#yperson::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: rgb(10, 26, 112);
+}
+
+#yperson th{
+    text-align: center;
+}
+
+#yperson a{
+    color: rgb(10, 26, 112);
+}
+
+#yperson td{
+    text-align:center;
+}
