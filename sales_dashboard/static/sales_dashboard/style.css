@@ -96,12 +96,34 @@ h4{
 
 .feed{
     background-color: rgb(255, 255, 255);
-    height: 100%;
+    height: 530px;
     border: 2px solid rgb(209, 209, 209);
     border-radius: 10px;
     padding-left: 3%;
     padding-right: 3%;
+    overflow-y: scroll;
 }
+
+.feed::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.feed::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+.feed::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: rgb(10, 26, 112);
+}
+
 
 .feed th{
     text-align: center;
