@@ -9,19 +9,18 @@ body {
     border: 2px solid rgb(209, 209, 209);
     border-radius: 10px;
     height:55px;
-    text-align: justify;
-}
-#title{
-    height: 50px;
-    
-}
-h1{
-    font-size: 20px;
-    color: rgb(10, 26, 112);
-    background-color: yellow;
-    
 }
 
+h4{
+    margin-top: 5px;
+    color: rgb(10, 26, 112);
+    display: inline-block;
+}
+
+.switch{
+    display: inline-block;
+    
+}
 
 .switch label input[type=checkbox]:checked + .lever:after {
     background-color: rgb(10, 26, 112);
