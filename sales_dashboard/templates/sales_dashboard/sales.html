@@ -1,5 +1,6 @@
 {# sales_dashboard/templates/sales_dashboard/sales.html #}
 {% load render_table from django_tables2 %}
+{% load sales_extras %}
 <!doctype html>
 <html>
 
@@ -24,27 +25,52 @@
         // draws it.
         function drawChart() {
 
-            // Create the data table.
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Regions');
-            data.addColumn('number', 'Sales');
-            data.addRows([
+            // Create the monthly data table.
+            var month_data = google.visualization.arrayToDataTable([
+                ['Sales', 'Monthly Sales', 'Sales Left Till Goal', { role: 'annotation' }],
                 {% for region in view.regions %}
-        ['{{ region.region_name }}', {{ region.Monthly_Sales }}],
-            {% endfor %}
-        ]);
+                    {% for goals in view.goals %}
+                            ['{{ region.region_name }}', {{ region.Monthly_Sales }}, {{ goals.mnregion_goal|subtract:region.Monthly_Sales }}, ''],
+                    {% endfor %}
+                {% endfor %}
+            ]);
 
-        // Set chart options
-        var options = {
-            'title': 'Monthly Sales Per Region',
+            var month_options = {
+                height: 300,
+                title: 'Monthly Sales Per Region\n',
+                legend: { position: 'top', maxLines: 3 },
+                bar: { groupWidth: '75%' },
+                isStacked: true
+            };
 
-            'height': 300
-        };
+            
+            // Instantiate and draw our chart, passing in some options.
+            var month_chart = new google.visualization.BarChart(document.getElementById('month_chart_div'));
+            month_chart.draw(month_data, month_options);
 
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
+            // Create the yearly data table.
+            var year_data = google.visualization.arrayToDataTable([
+                ['Sales', 'Yearly Sales', 'Sales Left Till Goal', { role: 'annotation' }],
+                {% for region in view.regions %}
+                    {% for goals in view.goals %}
+                            ['{{ region.region_name }}', {{ region.Yearly_Sales }}, {{ goals.yrregion_goal|subtract:region.Yearly_Sales }}, ''],
+                    {% endfor %}
+                {% endfor %}
+            ]);
+
+            var year_options = {
+                height: 300,
+                title: 'Yearly Sales Per Region\n',
+                legend: { position: 'top', maxLines: 3 },
+                bar: { groupWidth: '75%' },
+                isStacked: true
+            };
+
+            
+            // Instantiate and draw our chart, passing in some options.
+            var year_chart = new google.visualization.BarChart(document.getElementById('year_chart_div'));
+            year_chart.draw(year_data, year_options);
+        }
 
         $(window).resize(function () {
             drawChart();
@@ -61,10 +87,12 @@
             if (ischecked) {
                 months.style.display = "none";
                 years.style.display = "block";
+                drawChart()
             }
             else {
                 months.style.display = "block";
                 years.style.display = "none";
+                drawChart();
             }
         }   
     </script>
@@ -72,20 +100,20 @@
     <div class="row" id="header">
         <div class="col s12" id="title">
             <h4>Manufactured Housing Sales Dashboard</h1>
-            <div class="switch">
-                <label>
-                    Month
-                    <input id="viewswitch" type="checkbox" onclick="switcher()">
-                    <span class="lever"></span>
-                    Year
-                </label>
-            </div>
+                <div class="switch">
+                    <label>
+                        Month
+                        <input id="viewswitch" type="checkbox" onclick="switcher()">
+                        <span class="lever"></span>
+                        Year
+                    </label>
+                </div>
         </div>
 
     </div>
     <div class="row" id="month_tables">
         <div class="col s4" id="leftpanel1">
-            <div id="chart_div"></div>
+            <div id="month_chart_div"></div>
             <div class="feed">
                 {% render_table tables.6 %}
             </div>
@@ -102,10 +130,7 @@
     </div>
     <div class="row" id="year_tables">
         <div class="col s4" id="leftpanel2">
-            <div id="chart_div"></div>
-            <div class="yregion">
-                {% render_table tables.3 %}
-            </div>
+            <div id="year_chart_div"></div>
             <div class="feed">
                 {% render_table tables.6 %}
             </div>
@@ -117,6 +142,7 @@
             {% render_table tables.5 %}
         </div>
     </div>
+    
 </body>
 
 </html>

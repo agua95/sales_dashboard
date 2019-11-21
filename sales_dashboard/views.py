@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
-from .models import Region, Property, Sale, Person
+from .models import Region, Property, Sale, Person, Goal
 from django.views.generic import ListView
 from .tables import SalesFeedTable, MonthRegionTable, MonthPropertyTable, MonthPersonTable, YearRegionTable, YearPropertyTable, YearPersonTable
 from django_tables2 import MultiTableMixin, SingleTableView
@@ -15,7 +15,7 @@ def index(request):
 
 
 class SalesListView(MultiTableMixin, TemplateView):
-    model = Sale, Region, Property, Person
+    model = Sale, Region, Property, Person, Goal
     template_name = 'sales_dashboard/sales.html'
     qs = Sale.objects.all()
     mq = Sale.objects.filter(date__month = datetime.today().month)
@@ -38,3 +38,5 @@ class SalesListView(MultiTableMixin, TemplateView):
     def regions(self):
         return Region.objects.all().order_by('region_name')
 
+    def goals(self):
+        return Goal.objects.all()

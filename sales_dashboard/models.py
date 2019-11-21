@@ -4,6 +4,14 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 import random
 
+class Goal(models.Model):
+    mnregion_goal = models.IntegerField(default=0, verbose_name="Monthly Region Sales Goal")
+    mnproperty_goal = models.IntegerField(default=0, verbose_name="Monthly Property Sales Goal")
+    mnperson_goal = models.IntegerField(default=0, verbose_name="Monthly Salesperson Sales Goal")
+    yrregion_goal = models.IntegerField(default=0, verbose_name="Annual Region Sales Goal")
+    yrproperty_goal = models.IntegerField(default=0, verbose_name="Annual Property Sales Goal")
+    yrperson_goal = models.IntegerField(default=0, verbose_name="Annual Salesperson Sales Goal")
+ 
 class Region(models.Model):
     region_name = models.CharField(max_length=10, verbose_name="Region")
     
@@ -45,6 +53,7 @@ class Person(User):
 
     def name(self):
         return self
+
 
 class Sale(models.Model):
     prop_name = models.ForeignKey(Property, on_delete=models.CASCADE)
